@@ -1,0 +1,29 @@
+{
+    "name": "atriontechsd/simpletable",
+    "description": "Create and manage your simple and beautyfull datatable for laravel project with Tailwindcss and Livewire",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Atriontechsd\\Simpletable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
+        "files": [
+            "src/Helpers/Universal.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Atriontech Soluciones Digitales",
+            "email": "support@atriontechsd.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^9.19",
+        "livewire/livewire": "^2.10"
+    }
+}
