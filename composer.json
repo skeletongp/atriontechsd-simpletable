@@ -1,6 +1,6 @@
 {
     "name": "atriontechsd/simpletable",
-    "description": "Create and manage your simple and beautyfull datatable for laravel project with Tailwindcss and Livewire",
+    "description": "Create and manage your simple and beautyfull datatable for laravel projects with Tailwindcss and Livewire",
     "type": "library",
     "license": "MIT",
     "autoload": {
