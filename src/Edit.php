@@ -10,6 +10,7 @@ class Edit{
     public String $type = 'edit';
     public String $alias;
     public bool $sortable=false;
+    public bool $searchable=false;
     public $key='id';
     public $table;
     public $componentName;
@@ -26,9 +27,7 @@ class Edit{
     }
     public function name($name){
         $this->componentName = $name;
-        if(!file_exists(resource_path('views/livewire/'.$name.'.blade.php'))){
-            Artisan::call('new-edit '.$name);
-        }
+ 
 
         return $this;
     }
