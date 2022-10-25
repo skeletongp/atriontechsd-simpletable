@@ -21,8 +21,9 @@ class Tablecontent
     }
     public function getContent()
     {
+        $path=" App\Http\Livewire".$this->subdir? '\\'.$this->subdir : '';
         return "<?php
-        namespace App\Http\Livewire".$this->subdir? '\\'.$this->subdir : ''.";
+        namespace {$path};
         
         use Atriontechsd\SimpleTable\Column;
         use Atriontechsd\SimpleTable\Components\Table;
