@@ -59,6 +59,7 @@ class NewDatatable extends Command
     }
     
     public function getContent($subdir){
+        $subdir=substr($subdir, 0, -1);
        $contentClass= new Tablecontent( ucfirst($this->getFileName($this->argument('name'))), $subdir);
        $content=$contentClass->getContent();
        return $content;

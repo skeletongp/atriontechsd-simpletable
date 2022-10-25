@@ -1,6 +1,6 @@
 <?php
 
-namespace Atriontechsd\SimpleTable;
+namespace Atriontechsd\SimpleTable\Components;
 
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;

@@ -22,7 +22,12 @@ class Tablecontent
     public function getContent()
     {
         $subdir=$this->subdir?: '';
-        $path=" App\Http\Livewire\\".$subdir;
+        if ($subdir) {
+            $path=" App\Http\Livewire\\".$subdir;
+        } else {
+            $path=" App\Http\Livewire";
+        }
+        
         return "<?php
         namespace {$path};
         
