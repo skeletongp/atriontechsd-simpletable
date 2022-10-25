@@ -136,7 +136,6 @@ class ComposerStaticInit88a05cffe034095f12528d5730c5b4bb
         ),
         'A' => 
         array (
-            'Atriontechsd\\Simpletable\\' => 25,
             'Atriontechsd\\SimpleTable\\' => 25,
         ),
     );
@@ -376,13 +375,10 @@ class ComposerStaticInit88a05cffe034095f12528d5730c5b4bb
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'Atriontechsd\\Simpletable\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'Atriontechsd\\SimpleTable\\' => 
         array (
-            0 => __DIR__ . '/..' . '/atriontechsd/simpletable/src',
+            0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/..' . '/atriontechsd/simpletable/src',
         ),
     );
 
