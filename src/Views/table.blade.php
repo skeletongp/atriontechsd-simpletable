@@ -63,8 +63,10 @@
 
                                         @case('edit')
                                             @php
-                                                $edit= new \Components\Edit::class;
+                                                $edit= new \Atriontechsd\SimpleTable\Components\Edit();
                                                 $edit->setTable($element->table);
+                                                $edit->setKeyName($element->key);
+                                                $edit->setKeyValue($item->{$element->key});
                                                 
                                             @endphp
                                         @break

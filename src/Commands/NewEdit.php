@@ -28,7 +28,7 @@ class NewEdit extends Command
         $path=$this->argument('name');
         $subdir=$this->getSubdir($path);
         $filename='edit'.ucfirst($this->getFilename($path));
-        $filePath=$this->basePath."/".$subdir.$filename.".blase.php";
+        $filePath=$this->basePath."/".$subdir.$filename.".blade.php";
         $content=$this->getContent($subdir);
         //explode subdir and create dir if not exists
         $this->createDir($subdir);

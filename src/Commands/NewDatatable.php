@@ -5,6 +5,7 @@ namespace Atriontechsd\SimpleTable\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Atriontechsd\SimpleTable\Commands\Tablecontent;
+use Illuminate\Support\Facades\Artisan;
 
 class NewDatatable extends Command
 {
@@ -33,6 +34,7 @@ class NewDatatable extends Command
         
         if(!File::exists($filePath)){
             File::put($filePath, $content);
+            Artisan::call('new-edit', ['name' => $filename]);
             $this->info("Component created with name: ".$filename." and path: ".$filePath);
             
         }else{
