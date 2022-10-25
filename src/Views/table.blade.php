@@ -1,17 +1,17 @@
-
-    <!-- component -->
-    <div class="md:px-8 py-4 w-full">
-        {{$this->page_name}}
-        <div class="py-4 flex items-center justify-end" wire:ignore>
-            <div
-                class="flex space-x-0 items-center px-2 bg-gray-200 rounded-md border-2 border-transparent overflow-hidden focus-within:border-blue-300">
-                <i class="bi bi-search"></i>
-                <input wire:model.debounce.300ms="search" id="{{ uniqid() }}" type="search"
-                    class="px-3 py-2 bg-transparent outline-none focus:outline-none focus:ring-0">
-            </div>
-
-        </div>
+<div class="relative">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
+    <div class="md:px-8 py-4 w-full" wire:key="{{ uniqid() }}">
+        
         <div class="shadow overflow-hidden overflow-x-auto lg:w-max mx-auto rounded border-b border-gray-200">
+            <div class="py-4 flex items-center justify-end" wire:ignore>
+                <div
+                    class="flex space-x-0 items-center px-2 bg-gray-200 rounded-md border-2 border-transparent overflow-hidden focus-within:border-blue-300">
+                    <i class="bi bi-search"></i>
+                    <input autofocus wire:model.debounce.300ms="search" id="{{ uniqid() }}" type="search"
+                        class="px-3 py-2 bg-transparent outline-none focus:outline-none focus:ring-0">
+                </div>
+    
+            </div>
             <table class="w-max mx-auto bg-white table-auto ">
                 <thead class="bg-gray-800 text-white">
                     <tr>
@@ -35,7 +35,8 @@
                     @forelse($data as $item)
                         <tr class="odd:bg-gray-200">
                             @foreach ($columns as $element)
-                                <td class=" text-left py-2 px-3 whitespace-nowrap overflow-hidden overflow-ellipsis max-w-xs w-max">
+                                <td
+                                    class=" text-left py-2 px-3 whitespace-nowrap overflow-hidden overflow-ellipsis max-w-xs w-max">
                                     @switch($element->type)
                                         @case('string')
                                             @php
@@ -59,6 +60,10 @@
                                         @case('number')
                                             {{ formatNumber($item->{$element->alias}) }}
                                         @break
+
+                                        @case('component')
+                                            @livewire($element->name, [$element->properties], :key(uniqid()))
+                                        @break
                                     @endswitch
                                 </td>
                             @endforeach
@@ -72,8 +77,8 @@
                         @endforelse
 
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
                 <div class="py-2 hidden lg:block">
                     {{ $data->onEachSide(1)->links() }}
                 </div>
@@ -82,4 +87,6 @@
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
