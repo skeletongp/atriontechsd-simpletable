@@ -25,7 +25,7 @@ class NewDatatable extends Command
     public function handle(){
         $path=$this->argument('name');
         $subdir=$this->getSubdir($path);
-        $filename=ucfirst($this->getFilename($path));
+        $filename=ucfirst($this->getFilename($path)).'Table';
         $content=$this->getContent();
         $filePath=$this->basePath."/".$subdir.$filename.".php";
         //explode subdir and create dir if not exists

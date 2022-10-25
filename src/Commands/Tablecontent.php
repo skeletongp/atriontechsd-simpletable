@@ -9,7 +9,7 @@ class Tablecontent{
 
     public function __construct($name)
     {
-        $this->name = $name;
+        $this->name = ucfirst($name);
         $this->nameLower = strtolower($name);
         $this->namePlural = Str::plural($this->nameLower);
     }
@@ -21,7 +21,7 @@ class Tablecontent{
         use Atriontechsd\SimpleTable\Table;
         use Atriontechsd\SimpleTable\TableInterfaz;
         
-        class {$this->name} extends Table implements TableInterfaz
+        class {$this->name}Table extends Table implements TableInterfaz
         {
             public function setTable(): string
             {
@@ -37,11 +37,11 @@ class Tablecontent{
             public function joins(): array
             {
                 return [
-                    'related' => [
+                    /*'related' => [
                         'foreing_key',
                         'local_key',
                         'alias' => 'some_alias'
-                    ]
+                    ]*/
                 ];
             }
             
