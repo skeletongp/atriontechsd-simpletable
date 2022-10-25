@@ -6,18 +6,20 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Atriontechsd\SimpleTable\Commands\Tablecontent;
 
-class NewDatatable extends Command
+class NewEdit extends Command
 {
     public $basePath;
-    protected $signature = 'new-datatable {name}';
+    protected $signature = 'new-edit {name}';
 
    
-    protected $description = 'Create new component datatable';
+    protected $description = 'Create new component for edit data';
 
    
     public function __construct()
     {
-        $this->basePath="app/http/Livewire";
+        //base path for livewire components views 
+        $this->basePath="resources/views/livewire";
+
         parent::__construct();
     }
   
@@ -25,18 +27,18 @@ class NewDatatable extends Command
     public function handle(){
         $path=$this->argument('name');
         $subdir=$this->getSubdir($path);
-        $filename=ucfirst($this->getFilename($path)).'Table';
-        $filePath=$this->basePath."/".$subdir.$filename.".php";
+        $filename='edit'.ucfirst($this->getFilename($path));
+        $filePath=$this->basePath."/".$subdir.$filename.".blase.php";
         $content=$this->getContent($subdir);
         //explode subdir and create dir if not exists
         $this->createDir($subdir);
         
         if(!File::exists($filePath)){
             File::put($filePath, $content);
-            $this->info("Component created with name: ".$filename." and path: ".$filePath);
+            $this->info("Component view created with name : ".$filename." and path: ".$filePath);
             
         }else{
-            $this->error("Component already exists");
+            $this->error("Component view already exists");
         }
     }
     
@@ -59,7 +61,7 @@ class NewDatatable extends Command
     }
     
     public function getContent($subdir){
-       $contentClass= new Tablecontent( ucfirst($this->getFileName($this->argument('name'))), $subdir);
+       $contentClass= new Editcontent();
        $content=$contentClass->getContent();
        return $content;
     }

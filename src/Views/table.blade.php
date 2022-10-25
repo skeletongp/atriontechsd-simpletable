@@ -61,8 +61,12 @@
                                             {{ formatNumber($item->{$element->alias}) }}
                                         @break
 
-                                        @case('component')
-                                            @livewire($element->name, [$element->properties], :key(uniqid()))
+                                        @case('edit')
+                                            @php
+                                                $edit= new \Components\Edit::class;
+                                                $edit->setTable($element->table);
+                                                
+                                            @endphp
                                         @break
                                     @endswitch
                                 </td>

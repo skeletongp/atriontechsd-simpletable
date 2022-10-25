@@ -9,5 +9,9 @@ interface TableInterfaz {
 
     public function joins() : array;
 
+    public function edit($key_name, $key_value, $table);
+
+    
+
     
 }

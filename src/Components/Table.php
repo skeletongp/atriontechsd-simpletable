@@ -39,6 +39,11 @@ class Table extends Component
         'orderBy' => ['except' => 'id'],
     ];
 
+    protected $listeners=[
+        'edit' => 'edit',
+        'delete' => 'delete',
+        'refresh' => '$refresh',
+    ];
     public function render()
     {
         $data = $this->builder();
@@ -143,4 +148,6 @@ class Table extends Component
      public function sumarize($column){
 
      }
+
+     
 }
