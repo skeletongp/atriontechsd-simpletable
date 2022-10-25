@@ -20,8 +20,5 @@ class Component {
        return $this;
    }
 
-    
-   
-
 
 }
