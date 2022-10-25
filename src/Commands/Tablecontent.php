@@ -57,15 +57,15 @@ class Tablecontent
                         'alias' => 'some_alias'
                     ]*/
                 ];
-            }
+            }".
 
-            public function edit(){
+            'public function edit($key_name, $key_value, $table)){
                 /*
                 Your logic here
                 */
             }
             
         }
-        ";
+        ';
     }
 }
