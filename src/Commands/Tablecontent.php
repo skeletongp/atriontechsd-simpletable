@@ -30,7 +30,7 @@ class Tablecontent{
             public function columns(): array
             {
                 return [
-                    Column::name('{$this->namePlural}.id')->label('Id')->sortable()->alias('number')->searchble(false),
+                    Column::name('{$this->namePlural}.id')->label('Id')->sortable()->alias('number')->searchable(false),
                    
                 ];
             }

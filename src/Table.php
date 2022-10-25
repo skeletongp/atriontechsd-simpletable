@@ -23,6 +23,7 @@ class Table extends Component
     public $orderDirection = 'asc';
     public $search = '';
     public $searcheables=[];
+    public $pageName='page';
 
     public $next, $prev, $total, $from, $to, $currentPage;
 
@@ -48,8 +49,8 @@ class Table extends Component
 
     public function builder()
     {
+        $this->id=uniqid();
         $this->columns = $this->columns();
-
         $this->getFields();
         $table = $this->setTable();
         $query = DB::table($table);
@@ -63,7 +64,7 @@ class Table extends Component
     }
     public function getData($query)
     {
-        $data = $query->paginate($this->perPage, ['*'], 'page', $this->page);
+        $data = $query->paginate($this->perPage, ['*'], $this->pageName, $this->page);
         $this->next = $data->nextPageUrl();
         $this->prev = $data->previousPageUrl();
         $this->total = $data->total();
