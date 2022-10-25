@@ -42,9 +42,7 @@ class Table extends Component
     public function render()
     {
         $data = $this->builder();
-       
-
-        return view('livewire.table', compact('data'));
+        return view('simpletable::table', compact('data'));
     }
 
     public function builder()

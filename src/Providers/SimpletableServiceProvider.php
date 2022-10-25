@@ -8,6 +8,7 @@ class SimpletableServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/../Ciews', 'simpletable');
         if ($this->app->runningInConsole()) {
             $this->commands([
                 NewDatatable::class,
