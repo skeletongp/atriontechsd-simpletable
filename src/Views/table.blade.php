@@ -67,7 +67,6 @@
                                                 $edit->setTable($element->table);
                                                 $edit->setKeyName($element->key);
                                                 $edit->setKeyValue($item->{$element->key});
-                                                
                                             @endphp
                                         @break
                                     @endswitch
