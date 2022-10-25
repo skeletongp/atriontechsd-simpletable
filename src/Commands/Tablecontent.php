@@ -15,7 +15,6 @@ class Tablecontent{
     }
     public function getContent(){
         return "<?php
-
         namespace App\Http\Livewire;
         
         use Atriontechsd\SimpleTable\Column;
