@@ -21,7 +21,7 @@ class Tablecontent
     }
     public function getContent()
     {
-        $path=" App\Http\Livewire".$this->subdir? '\\'.$this->subdir : '';
+        $path=" App\Http\Livewire".$this->subdir? "/\/".$this->subdir : '';
         return "<?php
         namespace {$path};
         
