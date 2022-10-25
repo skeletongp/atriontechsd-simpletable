@@ -17,6 +17,14 @@
             "src/Helpers/Universal.php"
         ]
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Atriontechsd\\Simpletable\\SimpletableServiceProvider"
+            ]
+        }
+    },
+    
     "authors": [
         {
             "name": "Atriontech Soluciones Digitales",
