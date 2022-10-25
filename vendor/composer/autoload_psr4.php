@@ -65,4 +65,5 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Atriontechsd\\Simpletable\\' => array($baseDir . '/src'),
+    'Atriontechsd\\SimpleTable\\' => array($vendorDir . '/atriontechsd/simpletable/src'),
 );

@@ -137,6 +137,7 @@ class ComposerStaticInit88a05cffe034095f12528d5730c5b4bb
         'A' => 
         array (
             'Atriontechsd\\Simpletable\\' => 25,
+            'Atriontechsd\\SimpleTable\\' => 25,
         ),
     );
 
@@ -378,6 +379,10 @@ class ComposerStaticInit88a05cffe034095f12528d5730c5b4bb
         'Atriontechsd\\Simpletable\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Atriontechsd\\SimpleTable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/atriontechsd/simpletable/src',
         ),
     );
 
