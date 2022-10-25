@@ -59,7 +59,7 @@ class Tablecontent
                 ];
             }".
 
-            'public function edit($key_name, $key_value, $table)){
+            'public function edit($key_name, $key_value, $table){
                 /*
                 Your logic here
                 */
