@@ -14,7 +14,6 @@ class SimpletableServiceProvider extends ServiceProvider
                 NewDatatable::class,
             ]);
         } */
-
     }
 
     public function register()
