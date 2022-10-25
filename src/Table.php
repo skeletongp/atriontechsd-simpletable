@@ -23,7 +23,7 @@ class Table extends Component
     public $orderDirection = 'asc';
     public $search = '';
     public $searcheables=[];
-    public $pageName='page';
+    public $page_name='page';
 
     public $next, $prev, $total, $from, $to, $currentPage;
 
@@ -64,7 +64,7 @@ class Table extends Component
     }
     public function getData($query)
     {
-        $data = $query->paginate($this->perPage, ['*'], $this->pageName, $this->page);
+        $data = $query->paginate($this->perPage, ['*'], $this->page_name, $this->page);
         $this->next = $data->nextPageUrl();
         $this->prev = $data->previousPageUrl();
         $this->total = $data->total();
