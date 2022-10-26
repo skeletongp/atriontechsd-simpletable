@@ -113,7 +113,10 @@ class Table extends Component
     }
     public function getFields()
     {
-        //get key name from columns and make array
+        //get key name from columns and make array whre type not is edit
+        $columns = array_filter($this->columns, function ($column) {
+            return $column->type != 'edit';
+        });
         $fields = array_map(function ($column) {
            //column searcheable add to searcheables array
             if($column->searchable){
@@ -124,7 +127,7 @@ class Table extends Component
             }
             
             return $column->name.' as '.$column->alias;
-        }, $this->columns);
+        }, $columns);
         return $fields;
     }
 

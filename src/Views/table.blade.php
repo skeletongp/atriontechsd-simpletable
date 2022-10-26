@@ -61,13 +61,8 @@
                                             {{ formatNumber($item->{$element->alias}) }}
                                         @break
 
-                                        @case('edit')
-                                            @php
-                                                $edit= new \Atriontechsd\SimpleTable\Components\Edit();
-                                                $edit->setTable($element->table);
-                                                $edit->setKeyName($element->key);
-                                                $edit->setKeyValue($item->{$element->key});
-                                                @endphp
+                                        @case('modal')
+                                          @livewire($element->component, ['data'=>(array)$item], key(uniqid()))
                                         @break
                                     @endswitch
                                 </td>

@@ -2,6 +2,10 @@
 
 namespace Atriontechsd\SimpleTable;
 
+use Closure;
+use Illuminate\Support\Facades\Artisan;
+use Nette\Utils\Callback;
+
 class Column
 {
 
@@ -18,7 +22,6 @@ class Column
 
     public static function name($name)
     {
-
         $column = new static;
         $column->name = $name;
         $column->label = $name;
@@ -43,12 +46,28 @@ class Column
     }
     public function type($type)
     {
-        $typeable = ['string', 'date', 'number', 'money'];
+        $typeable = ['string', 'date', 'number', 'money', 'modal'];
         if (in_array($type, $typeable)) {
             $this->type = $type;
         }
+
         return $this;
     }
+    //function modal to set component and data as closure that return array
+
+    public function modal(
+        string $component,
+        string $column
+    ) {
+        $this->type = 'modal';
+        $this->alias = $column;
+        $makeModal = new MakeModal();
+        $this->component = 
+        $makeModal->createModal($component);
+        return $this;
+    }
+
+
     public function format($format)
     {
         switch ($this->type) {

@@ -1,0 +1,24 @@
+{
+  "name": "simpletable",
+  "version": "1.0.25",
+  "description": "Create and manage your simple and beautyfull datatable for laravel projects with Tailwindcss and Livewire",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://skeletongp: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@github.com/skeletongp/atriontechsd-simpletable.git"
+  },
+  "keywords": [
+    "simpletable",
+    "datatable",
+    "livewire-datatable"
+  ],
+  "author": "Atriontech Soluciones Digitales",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skeletongp/atriontechsd-simpletable/issues"
+  },
+  "homepage": "https://github.com/skeletongp/atriontechsd-simpletable#readme"
+}
