@@ -57,7 +57,7 @@ class Tablecontent
                         'alias' => 'some_alias'
                     ]*/
                 ];
-            }".
+            }".PHP_EOL.
 
             'public function edit($key_name, $key_value, $table){
                 /*

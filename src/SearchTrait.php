@@ -8,6 +8,7 @@ trait SearchTrait
 {
     public function updatedSearch($value)
     {
+        
         $this->page = 1;
     }
     public function search(Builder $query, $search)

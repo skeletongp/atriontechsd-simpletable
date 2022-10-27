@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Atriontechsd\SimpleTable\SearchTrait;
+use Atriontechsd\SimpleTable\Styles\TableStyles;
 use Livewire\WithPagination;
 
-class Table extends Component
+class Table extends Component 
 {
     protected $route;
     protected $tableName;
@@ -19,17 +20,19 @@ class Table extends Component
     public $emptyMessage = 'No data found';
     public $perPage = 10;
     public $page = 1;
-    public $orderBy='id';
+    public $orderBy;
     public $orderDirection = 'asc';
     public $search = '';
-    public $searcheables=[];
-    public $page_name='page';
+    public $searcheables = [];
+    public $page_name = 'page';
+    public $title='Table from Atriontechsd/SimpleTable';
+   
 
     public $next, $prev, $total, $from, $to, $currentPage;
 
     public bool $is_paginated = false;
 
-    use SearchTrait, WithPagination;
+    use SearchTrait, WithPagination, TableStyles;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -39,11 +42,20 @@ class Table extends Component
         'orderBy' => ['except' => 'id'],
     ];
 
-    protected $listeners=[
+    protected $listeners = [
         'edit' => 'edit',
         'delete' => 'delete',
         'refresh' => '$refresh',
     ];
+
+    public function mount()
+    {
+        $this->setStyles();
+        if(!$this->orderBy){
+            $this->orderBy=$this->setTable().'.id';
+        }
+
+    }
     public function render()
     {
         $data = $this->builder();
@@ -52,7 +64,7 @@ class Table extends Component
 
     public function builder()
     {
-        $this->id=uniqid();
+        $this->id = uniqid();
         $this->columns = $this->columns();
         $this->getFields();
         $table = $this->setTable();
@@ -63,7 +75,7 @@ class Table extends Component
         $this->search($query, $this->search);
         $this->order($query);
         $data = $this->getData($query);
-       return $data;
+        return $data;
     }
     public function getData($query)
     {
@@ -73,6 +85,7 @@ class Table extends Component
         $this->total = $data->total();
         $this->from = $data->firstItem();
         $this->to = $data->lastItem();
+        $this->lastPage = $data->lastPage();
         $this->currentPage = $data->currentPage();
         return $data;
     }
@@ -80,12 +93,12 @@ class Table extends Component
     public function addJoins(Builder $query)
     {
         $joins = $this->joins();
-        foreach ($joins as $table=> $join) {
+        foreach ($joins as $table => $join) {
             //table remove non letters
             $table = preg_replace('/[^A-Za-z\-]/', '', $table);
             if (array_key_exists('alias', $join)) {
-              //set table alias on join query
-                $query->leftjoin($table.' as '.$join['alias'], $join['alias'] . '.' . $join[0], '=', $this->setTable().'.'.$join[1]);
+                //set table alias on join query
+                $query->leftjoin($table . ' as ' . $join['alias'], $join['alias'] . '.' . $join[0], '=', $this->setTable() . '.' . $join[1]);
             } else {
                 $query->leftjoin($join[0], '=', $join[1]);
             }
@@ -94,17 +107,19 @@ class Table extends Component
     public function order(Builder $query)
     {
         $query->orderBy($this->orderBy, $this->orderDirection);
-    }   
+    }
 
-    public function setOrder($sortable, $column){
-        if($sortable){
-            if($this->orderBy == $column){
-                if($this->orderDirection == 'asc'){
+
+    public function setOrder($sortable, $column)
+    {
+        if ($sortable) {
+            if ($this->orderBy == $column) {
+                if ($this->orderDirection == 'asc') {
                     $this->orderDirection = 'desc';
-                }else{
+                } else {
                     $this->orderDirection = 'asc';
                 }
-            }else{
+            } else {
                 $this->orderBy = $column;
                 $this->orderDirection = 'asc';
             }
@@ -118,15 +133,15 @@ class Table extends Component
             return $column->type != 'edit';
         });
         $fields = array_map(function ($column) {
-           //column searcheable add to searcheables array
-            if($column->searchable){
+            //column searcheable add to searcheables array
+            if ($column->searchable) {
                 array_push($this->searcheables, [
                     'name' => $column->name,
                     'label' => $column->label
                 ]);
             }
-            
-            return $column->name.' as '.$column->alias;
+
+            return $column->name . ' as ' . $column->alias;
         }, $columns);
         return $fields;
     }
@@ -148,9 +163,16 @@ class Table extends Component
         }
     }
 
-     public function sumarize($column){
+    public function sumarize($column)
+    {
+    }
 
-     }
-
-     
+    
+   
+    public function updatingPage($value)
+    {
+        if($value>$this->lastPage){
+            $this->page=$this->lastPage;
+        }
+    }
 }

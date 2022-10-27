@@ -2,7 +2,9 @@
 
 namespace Atriontechsd\SimpleTable\Components;
 
-class Modal{
+class Modal
+
+{
      
     public $component;
     public $data=[];

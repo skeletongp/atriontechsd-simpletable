@@ -19,7 +19,10 @@ class Column
     public String $moneyPrefix = '$';
     public String $alias;
     public bool $searchable = false;
+    public bool $ellipsis = false;
 
+    public $cellClass;
+  
     public static function name($name)
     {
         $column = new static;
@@ -67,6 +70,11 @@ class Column
         return $this;
     }
 
+    public function cellClass($cellClass)
+    {
+        $this->cellClass = $cellClass;
+        return $this;
+    }
 
     public function format($format)
     {
@@ -92,6 +100,11 @@ class Column
     public function searchable($searchable = true)
     {
         $this->searchable = $searchable;
+        return $this;
+    }
+    public function ellipsis($ellipsis = true)
+    {
+        $this->ellipsis = $ellipsis;
         return $this;
     }
 }
