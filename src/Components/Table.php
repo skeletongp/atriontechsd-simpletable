@@ -6,11 +6,11 @@ use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
-use Atriontechsd\SimpleTable\SearchTrait;
+use Atriontechsd\SimpleTable\App\SearchTrait;
 use Atriontechsd\SimpleTable\Styles\TableStyles;
 use Livewire\WithPagination;
 
-class Table extends Component 
+class Table extends Component
 {
     protected $route;
     protected $tableName;
@@ -24,9 +24,11 @@ class Table extends Component
     public $orderDirection = 'asc';
     public $search = '';
     public $searcheables = [];
+    public $hideables = [];
     public $page_name = 'page';
-    public $title='Table from Atriontechsd/SimpleTable';
-   
+    public $title = 'Table from Atriontechsd/SimpleTable';
+    public $hideable = false;
+
 
     public $next, $prev, $total, $from, $to, $currentPage;
 
@@ -45,32 +47,38 @@ class Table extends Component
     protected $listeners = [
         'edit' => 'edit',
         'delete' => 'delete',
-        'refresh' => '$refresh',
+        'refreshSimpletable' => 'refreshSimpletable',
     ];
 
     public function mount()
     {
-        $this->setStyles();
-        if(!$this->orderBy){
-            $this->orderBy=$this->setTable().'.id';
+        if (!$this->columns) {
+            $this->columns = $this->columns();
         }
-
+        $this->setStyles();
+        if (!$this->orderBy) {
+            $this->orderBy = $this->setTable() . '.id';
+        }
     }
     public function render()
     {
         $data = $this->builder();
         return view('simpletable::table', compact('data'));
     }
+    public function refreshSimpletable()
+    {
+        $this->render();
+    }
 
     public function builder()
     {
         $this->id = uniqid();
-        $this->columns = $this->columns();
-        $this->getFields();
+
         $table = $this->setTable();
         $query = DB::table($table);
         $this->joins($query);
         $query->select($this->getFields());
+        $this->whereNullDeletedAt($query);
         $this->addJoins($query);
         $this->search($query, $this->search);
         $this->order($query);
@@ -88,6 +96,15 @@ class Table extends Component
         $this->lastPage = $data->lastPage();
         $this->currentPage = $data->currentPage();
         return $data;
+    }
+
+    public function whereNullDeletedAt($query)
+    {
+        $table = DB::table($this->setTable());
+        $columns = $table->getConnection()->getSchemaBuilder()->getColumnListing($this->setTable());
+        if (in_array('deleted_at', $columns)) {
+            $query->whereNull($this->setTable() . '.deleted_at');
+        }
     }
 
     public function addJoins(Builder $query)
@@ -129,15 +146,29 @@ class Table extends Component
     public function getFields()
     {
         //get key name from columns and make array whre type not is edit
+        if (is_array($this->columns)) {
+            $this->columns = json_decode(json_encode($this->columns));
+        }
+
         $columns = array_filter($this->columns, function ($column) {
             return $column->type != 'edit';
         });
+        $this->searcheables = [];
+        $this->hideables = [];
         $fields = array_map(function ($column) {
             //column searcheable add to searcheables array
+
             if ($column->searchable) {
                 array_push($this->searcheables, [
                     'name' => $column->name,
                     'label' => $column->label
+                ]);
+            }
+            if ($column->hideable) {
+                array_push($this->hideables, [
+                    'alias' => $column->alias,
+                    'label' => $column->label,
+                    'status' => $column->hidden
                 ]);
             }
 
@@ -167,12 +198,23 @@ class Table extends Component
     {
     }
 
-    
-   
+
+
     public function updatingPage($value)
     {
-        if($value>$this->lastPage){
-            $this->page=$this->lastPage;
+        if ($value > $this->lastPage) {
+            $this->page = $this->lastPage;
         }
+    }
+
+    public function toggleHide($alias)
+    {
+        foreach ($this->columns as $index => $column) {
+            if ($column['alias'] == $alias) {
+                $this->columns[$index]['hidden'] = !$this->columns[$index]['hidden'];
+            }
+        }
+
+        $this->render();
     }
 }

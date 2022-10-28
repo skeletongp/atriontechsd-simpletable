@@ -1,6 +1,7 @@
 <?php
 
-namespace Atriontechsd\SimpleTable;
+namespace Atriontechsd\SimpleTable\App;
+
 interface TableInterfaz {
 
     public function columns() : array;

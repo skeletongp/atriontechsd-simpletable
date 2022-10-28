@@ -12,9 +12,9 @@ class SimpletableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../Views', 'simpletable');
+        $this->loadViewsFrom(__DIR__.'/../Views\Icons', 'icons');
         
         Livewire::component('modal-delete', \Atriontechsd\SimpleTable\Components\ModalDelete::class);
-
 
 
         if ($this->app->runningInConsole()) {

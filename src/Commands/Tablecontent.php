@@ -31,9 +31,9 @@ class Tablecontent
         return "<?php
         namespace {$path};
         
-        use Atriontechsd\SimpleTable\Column;
+        use Atriontechsd\SimpleTable\App\Column;
         use Atriontechsd\SimpleTable\Components\Table;
-        use Atriontechsd\SimpleTable\TableInterfaz;
+        use Atriontechsd\SimpleTable\AppTableInterfaz;
         
         class {$this->name}Table extends Table implements TableInterfaz
         {

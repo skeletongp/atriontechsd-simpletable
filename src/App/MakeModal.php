@@ -1,6 +1,6 @@
 <?php
 
-namespace Atriontechsd\SimpleTable;
+namespace Atriontechsd\SimpleTable\App;
 
 class MakeModal
 {
